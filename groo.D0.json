@@ -1,0 +1,23 @@
+{
+  "groo": 1,
+  "no": "002",
+  "name": "Still Goods",
+  "name_ko": "스틸 굿즈",
+  "kind": "web",
+  "status": "BUILDING",
+  "line": "재고 없이 운영하는 자동 위탁판매 기록",
+  "url": "https://26rapper.github.io/still-goods/",
+  "icon": { "src": "https://26rapper.github.io/still-goods/assets/groo/icon-1024.webp", "frame": { "position": "50% 50%", "zoom": 1 } },
+  "accent": "#121418",
+  "shot": "https://26rapper.github.io/still-goods/assets/groo/shot.webp",
+  "public_json": "https://26rapper.github.io/still-goods/public/summary.json",
+  "figure": { "kind": "count", "value": "orders_total", "unit": "건", "label": "판매 기록", "small": [{ "key": "day", "unit": "일", "label": "운영" }], "as_of": "as_of" },
+  "facts": [
+    { "label": "올린 상품", "key": "listings_live" },
+    { "label": "운영 일수", "key": "day" }
+  ],
+  "money": true,
+  "money_kind": "sales",
+  "notice": "실제 판매 기록 · 투자 아님 · 광고 아님",
+  "update_note": "밤 9시 20분 갱신"
+}

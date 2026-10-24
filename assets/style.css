@@ -1,0 +1,76 @@
+/* Still Goods · 스틸 굿즈 — 002 기록 페이지 겉모습 한 벌
+   design/기록페이지_시안.html(디자인 세션 2026-10-24)을 그대로 옮김. 검은 바탕 · 영문 이름 앞 · 한글 작게 · LED 머리 숫자.
+   글꼴: IBM Plex Mono · IBM Plex Sans KR(Google Fonts · OFL 1.1). LED 는 글꼴이 아니라 SVG(assets/app.js). */
+:root{
+  --black:#0a0a0b; --gun:#1b1d20; --hi:#eef0f2; --silver:#c8ccd1; --label:#9aa0a6; --muted:#8b8279; --steel:#6f757c; --cream:#f3eee7;
+  --hair:rgba(200,204,209,.14); --hair-2:rgba(200,204,209,.08);
+  --led:#f3eee7; --led-off:rgba(243,238,231,.06); --led-rest:rgba(243,238,231,.55);
+  --f-mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --f-ui:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --gutter:32px; --h:150px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--black)}
+body{min-height:100svh;color:var(--hi);font-family:var(--f-ui);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;
+     word-break:keep-all;overflow-wrap:anywhere;display:grid;grid-template-rows:auto 1fr auto;
+     padding:calc(24px + env(safe-area-inset-top)) var(--gutter) calc(20px + env(safe-area-inset-bottom))}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none !important}
+/* 필름 결 — 정지, 4% (SVG feTurbulence · 바깥 파일 0) */
+.grain{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;opacity:.04;mix-blend-mode:overlay;z-index:5}
+/* 머리 줄 — 영문 이름 앞 · 한글 작게 · 오른쪽 번호 */
+header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--hair-2)}
+.wm{display:inline-flex;align-items:baseline;gap:9px;white-space:nowrap;margin:0;font-weight:500}
+.wm .en{font-family:var(--f-mono);font-weight:500;font-size:22px;line-height:1;letter-spacing:.04em;color:var(--hi)}
+.wm .ko{font-family:var(--f-ui);font-weight:500;font-size:11px;line-height:1;letter-spacing:.2em;color:var(--label);position:relative;top:-2px}
+.no{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--label)}
+/* 가운데 — 숫자 한 덩어리 */
+main{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 0}
+.label{font-size:12px;letter-spacing:.12em;color:var(--label);margin:0 0 22px}
+.figure{display:inline-flex;align-items:flex-end;gap:.14em;position:relative}
+.led{display:inline-flex;gap:7px;align-items:flex-end;transform:skewX(-6deg);transform-origin:0 100%}
+.led svg{display:block;height:var(--h);width:auto;overflow:visible}
+.led.lit{filter:drop-shadow(0 0 12px rgba(243,238,231,.35))}
+.unit{font-family:var(--f-ui);font-weight:500;font-size:calc(var(--h) * .4);line-height:1;color:var(--label);margin-left:.06em;padding-bottom:calc(var(--h) * .04)}
+.glow{position:absolute;left:50%;top:40%;width:360px;height:180px;transform:translate(-50%,-50%);border-radius:50%;
+      background:radial-gradient(circle, rgba(243,238,231,.16), transparent 70%);filter:blur(34px);pointer-events:none;opacity:0;z-index:-1}
+body.lit .glow{opacity:1}
+.small{margin:26px 0 0;font-size:13px;color:var(--label);letter-spacing:.02em}
+.small b{font-weight:500;color:var(--silver)}
+.small .sep{margin:0 8px;color:var(--steel)}
+.notice{margin:14px 0 0;font-size:12px;color:var(--label);letter-spacing:.02em}
+/* 스토어로 가는 링크 하나 — 주소는 config.json 의 store_url. 아직 없으면(#) 흐리게 */
+.go{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 22px;margin-top:40px;border:1px solid rgba(200,204,209,.35);border-radius:999px;
+    font-size:13px;font-weight:500;color:var(--hi);letter-spacing:.02em;transition:border-color .24s cubic-bezier(.2,.7,.2,1),background .24s cubic-bezier(.2,.7,.2,1)}
+.go:hover{border-color:var(--cream);background:rgba(243,238,231,.04)}
+.go:focus-visible{outline:1px solid var(--cream);outline-offset:3px}
+.go .arrow{font-family:var(--f-mono);color:var(--label)}
+.go.is-off{opacity:.55;cursor:default}
+.go.is-off:hover{border-color:rgba(200,204,209,.35);background:transparent}
+/* 바닥 — 출처 줄 · 라이선스 줄 · 작은 각인 */
+footer{display:flex;flex-direction:column;align-items:center;gap:22px;padding-top:18px;border-top:1px solid var(--hair-2)}
+.foot-lines{display:flex;flex-direction:column;gap:6px;align-items:center}
+.source,.license{margin:0;font-size:12px;color:var(--label);letter-spacing:.02em;text-align:center}
+.license{color:var(--steel)}
+.lock{display:inline-flex;flex-direction:column;font-family:var(--f-mono);font-size:11px;letter-spacing:.22em;white-space:nowrap;align-self:center;opacity:.9}
+.lock::before,.lock::after{content:"";display:block;height:1px;background:rgba(200,204,209,.22);margin-right:.22em}
+.lock .t{display:block;line-height:1;padding:4px 0}
+.lock .g{font-weight:500;color:var(--label)}
+.lock .s{font-weight:400;color:var(--steel);margin-left:1em}
+/* 예시 화면(?demo=1 · 로컬에서만) 표시 */
+body.demo .label{color:var(--muted)}
+/* shot 찍는 순간(?shot=1 · 로컬에서만) — 번호 002 · 출처 · 라이선스 줄을 감춘다. 자리는 그대로 */
+body.shot .no,body.shot .foot-lines{visibility:hidden}
+@media (max-width:640px){
+  :root{--gutter:20px;--h:clamp(84px, 24vw, 110px)}
+  header{padding-bottom:14px}
+  .wm .en{font-size:18px}
+  .wm .ko{font-size:10px;letter-spacing:.16em}
+  main{padding:32px 0}
+  .glow{width:260px;height:130px}
+  .small{margin-top:22px;font-size:12px}
+  .small .sep{margin:0 6px}
+  .go{margin-top:32px}
+  footer{gap:18px}
+}
+@media (prefers-reduced-motion: reduce){ .go{transition:none} }
