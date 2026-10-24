@@ -27,7 +27,7 @@
 | 것 | 출처 | 비고 |
 |---|---|---|
 | `assets/groo/icon-1024.webp` | `design/icon-1024.svg`(디자인 세션이 직접 그림)를 이 PC 의 Google Chrome 헤드리스로 1024×1024 로 찍어 Pillow 로 WebP 로 바꿈(`tools/make_assets.py`) | 바깥 그림 · 글꼴 0. 바탕 `#121418` = `groo.json` 의 `accent` |
-| `assets/groo/shot.webp` | 이 페이지의 첫 밤 전(—) 화면을 `?shot=1` 로 1280×800 으로 찍은 것 | 숫자 글자 0(`?shot=1` 이 번호 002 · 출처 · 라이선스 줄을 감춤) · 상품 사진 · 가격 0 |
+| `assets/groo/shot.webp` | 이 페이지의 첫 화면을 `?shot=1` 로 1280×800 으로 찍은 것 | 숫자 꼴 0(`?shot=1` 이 LED 블록 · 작은 줄 · 번호 002 · 출처 · 라이선스 줄을 감추고 LED 자리에 얇은 선 하나) · 상품 사진 · 가격 0 |
 | LED 일곱 토막 숫자(`assets/app.js` 의 `SEG` · `SEGP`) | GROO STUDIO 001 문로그 `site/index.html` 의 것을 그대로 옮김 | 스튜디오 안 자산. 글꼴이 아니라 SVG 경로 |
 | `캡처/*.png` | 같은 방법으로 찍은 확인용 그림 | 공개 저장소에는 올리지 않아도 된다 |
 

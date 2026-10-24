@@ -109,7 +109,8 @@
 
   function isLocal() { return /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname); }
 
-  /* ?shot=1(로컬에서만) — 카드 화면 그림(shot)을 찍는 순간: 머리 줄 번호 002 와 바닥 출처 · 라이선스 줄을 감춘다(숫자 글자 0). 자리는 그대로(visibility) */
+  /* ?shot=1(로컬에서만) — 카드 화면 그림(shot)을 찍는 순간: body.shot 으로 LED 블록(토막 · 단위) · 작은 줄 · 번호 002 · 출처 · 라이선스 줄을 감추고
+     LED 자리에 얇은 선 하나를 둔다(숫자 꼴 0 — 꺼진 LED 유령 토막도 카드 크기에서 숫자로 읽힌다). 감추는 규칙은 style.css 의 body.shot 묶음 */
   function shotMode() {
     var q = new URLSearchParams(location.search);
     if (q.get('shot') === '1' && isLocal()) document.body.classList.add('shot');
