@@ -26,7 +26,10 @@ header{display:flex;align-items:baseline;justify-content:space-between;gap:16px;
 .no{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;color:var(--label)}
 /* 가운데 — 숫자 한 덩어리 */
 main{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 0}
-.label{font-size:12px;letter-spacing:.12em;color:var(--label);margin:0 0 22px}
+/* 제목 · 설명 한 줄 · 숫자 이름 — 문구_통합본 K(record.title · record.sub · record.label_orders) */
+.label{font-size:15px;font-weight:500;letter-spacing:.08em;color:var(--silver);margin:0}
+.sub{margin:8px 0 0;font-size:12px;color:var(--label);letter-spacing:.02em}
+.cap{margin:34px 0 14px;font-size:11px;letter-spacing:.16em;color:var(--steel)}
 .figure{display:inline-flex;align-items:flex-end;gap:.14em;position:relative}
 .led{display:inline-flex;gap:7px;align-items:flex-end;transform:skewX(-6deg);transform-origin:0 100%}
 .led svg{display:block;height:var(--h);width:auto;overflow:visible}
@@ -64,6 +67,7 @@ body.demo .label{color:var(--muted)}
    LED 자리에 얇은 가로 선 하나(숫자 모양 아님)를 둔다. 남는 글 넷(머리 이름 · 라벨 · 면책 · 버튼 · 각인) 중 라벨과 버튼 글자는 더 작고 흐리게 */
 body.shot .no,body.shot .foot-lines{visibility:hidden}
 body.shot .figure,body.shot .small{display:none}
+body.shot .cap{display:none}
 .rule{display:none;width:240px;height:1px;background:rgba(200,204,209,.22);margin:64px 0 52px}
 body.shot .rule{display:block}
 body.shot .label{font-size:11px;color:var(--steel);letter-spacing:.14em;margin-bottom:0}
@@ -76,6 +80,8 @@ body.shot .go .arrow{color:var(--steel)}
   .wm .ko{font-size:10px;letter-spacing:.16em}
   main{padding:32px 0}
   .glow{width:260px;height:130px}
+  .label{font-size:14px}
+  .cap{margin:26px 0 12px}
   .small{margin-top:22px;font-size:12px}
   .small .sep{margin:0 6px}
   .rule{width:180px;margin:48px 0 40px}

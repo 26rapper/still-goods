@@ -1,7 +1,8 @@
 /* Still Goods · 스틸 굿즈 — 002 기록 페이지
    public/summary.json 의 값을 글자 그대로 옮긴다(셈 0 · 반올림 0 — 등록 규약 5판 4-2). 꼴이 어긋나면 그리지 않고 — 를 둔다.
    글은 전부 textContent 로만 넣는다(HTML 글자 끼워 넣기 0). LED 는 글꼴이 아니라 SVG 경로(문로그 SEG · SEGP 그대로).
-   파일이 없거나(404) day 가 0 이면 '첫 밤 전(—)' 화면. ?demo=1 은 로컬(localhost · 127.0.0.1)에서만 assets/demo/summary.json 을 읽는다. */
+   파일이 없거나(404) day 가 0 이면 운영 시작 전 화면(꺼진 LED + record.preparing 문구). ?demo=1 은 로컬(localhost · 127.0.0.1)에서만 assets/demo/summary.json 을 읽는다.
+   화면 글은 docs/문구_통합본.md K절(오너 확정 2026-10-25) 그대로: 판매 기록 · 판매 건수 · 운영 일수 · 판매 상품 수 · 시작 전 문구. */
 (function () {
   'use strict';
 
@@ -17,6 +18,8 @@
   var ON = '#f3eee7';
   var REST = 'rgba(243,238,231,.55)';
   var DASH = '—';                       /* — */
+  var PREPARING = '아직 판매 기록이 없습니다. 운영 시작 후 기록이 표시됩니다.';   /* 문구_통합본 K record.preparing — 화면 글 · aria 둘 다 */
+  var LOAD_FAIL = '숫자를 불러오지 못함';                                        /* 규약 4-2 · 카드판 설계 2-1 */
 
   function $(id) { return document.getElementById(id); }
   function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
@@ -82,15 +85,19 @@
     if (hasTail) $('asofPiece').textContent = tail;
   }
 
-  /* 첫 밤 전(—) · 또는 못 불러옴 */
-  function showEmpty(reason) {
+  /* 운영 시작 전 · 또는 못 불러옴 — 꺼진 LED 와 한 줄(작은 줄 대신) */
+  function showEmpty(msg) {
     ledOff();
-    $('figure').setAttribute('aria-label', '판매 건수 ' + DASH + ' 아직 정산된 기록이 없음');
-    setSmall(DASH, null, reason);
+    $('figure').setAttribute('aria-label', '판매 건수 ' + DASH + ' ' + msg);
+    $('small').hidden = true;
+    $('prep').textContent = msg;
+    $('prep').hidden = false;
   }
 
   /* 값이 있는 상태 — 글자 그대로 */
   function showData(S) {
+    $('prep').hidden = true;
+    $('small').hidden = false;
     var n = S.orders_total;
     if (okCount(n)) {
       var s = String(n);
@@ -128,11 +135,11 @@
       if (!r.ok) throw new Error('http ' + r.status);
       return r.json();
     }).then(function (S) {
-      if (S === null || typeof S !== 'object' || Array.isArray(S)) return showEmpty('첫 밤 전');
-      if (S.day === 0) return showEmpty('첫 밤 전');
+      if (S === null || typeof S !== 'object' || Array.isArray(S)) return showEmpty(PREPARING);
+      if (S.day === 0) return showEmpty(PREPARING);
       showData(S);
     }).catch(function () {
-      showEmpty('숫자를 불러오지 못함');
+      showEmpty(LOAD_FAIL);
     });
   }
 
